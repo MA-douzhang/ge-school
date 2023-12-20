@@ -9,6 +9,7 @@ import { setToken, clearToken } from '@/utils/auth';
 import { removeRouteListener } from '@/utils/route-listener';
 import { UserState } from './types';
 import useAppStore from '../app';
+import { AdminUserControllerService } from "../../../../generated";
 
 const useUserStore = defineStore('user', {
   state: (): UserState => ({
@@ -63,7 +64,8 @@ const useUserStore = defineStore('user', {
     // Login
     async login(loginForm: LoginData) {
       try {
-        const res = await userLogin(loginForm);
+        const res = await AdminUserControllerService.loginUsingPost(loginForm);
+        console.log("save token",res.data.token)
         setToken(res.data.token);
       } catch (err) {
         clearToken();

@@ -1,4 +1,4 @@
-const TOKEN_KEY = 'token';
+const TOKEN_KEY = 'X-Gemall-Token';
 
 const isLogin = () => {
   return !!localStorage.getItem(TOKEN_KEY);
