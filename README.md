@@ -6,8 +6,13 @@ Ge-school：
 后端：Python Flask
 
 ## 项目地址
-前端地址在分支 frontend [Ge-school项目](https://github.com/MA-douzhang/GeEnglish)
-前端管理地址在分支 frontend-admin [Ge-school项目](https://github.com/MA-douzhang/GeEnglish)
+前端地址在分支 frontend [前端前台项目](https://github.com/MA-douzhang/ge-school/tree/frontend)
+
+后端地址在分支 master [后端项目](https://github.com/MA-douzhang/ge-school)
+
+前端管理地址在分支 frontend-admin [前端管理项目](https://github.com/MA-douzhang/ge-school/tree/frontend-admin)
+
+在线预览[前端](http://47.109.132.119:7077/)
 
 ## 项目展示
 
