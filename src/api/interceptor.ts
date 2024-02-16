@@ -26,7 +26,7 @@ axios.interceptors.request.use(
       if (!config.headers) {
         config.headers = {};
       }
-      config.headers['X-Gemall-Token'] = `${token}`;
+      config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
   },

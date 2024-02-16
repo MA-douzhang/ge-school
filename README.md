@@ -1,55 +1,38 @@
-# 吉商城-移动端项目
+# 吉校园-前台项目
 
-Gemall：
+Ge-school：
 
-移动端：Flutter框架
-
-前端：Vue + Arco design pro框架开发
-
-后端：SpringBoot
+前端：Vue框架
+后端：Python Flask
 
 ## 项目地址
+前端管理地址在分支 frontend [Ge-school项目](https://github.com/MA-douzhang/GeEnglish)
+后端地址在分支 master [Ge-school项目](https://github.com/MA-douzhang/ge-school)
 
-* [Gemall-backend 后端](https://github.com/MA-douzhang/GeMall-backend)
-* [Gemall-frontend 前端管理](https://github.com/MA-douzhang/Gemall-frontend)
-* [GeTeamBuy 移动端](https://github.com/MA-douzhang/GeTeamBuy)
-
-
-## 借鉴项目
-* [litemall项目](https://github.com/linlinjava/litemall)
-* [new_flutter_mallprovider项目](https://github.com/lotawei/new_flutter_mallprovider)
+前端管理地址在分支 frontend-admin [Ge-school项目](https://github.com/MA-douzhang/GeEnglish)
 
 ## 项目展示
 
-后端管理界面
+前台端界面
 
-![](./doc/img/index1.png)
-![](./doc/img/index2.png)
-![](./doc/img/index3.png)
-![](./doc/img/index4.png)
-![](./doc/img/index5.png)
+![](./doc/img/1.jpg)
+![](./doc/img/2.jpg)
+![](./doc/img/3.jpg)
+![](./doc/img/4.jpg)
+![](./doc/img/5.jpg)
+![](./doc/img/6.jpg)
+![](./doc/img/7.jpg)
 
-移动端界面
-
-![](./doc/img/phone1.png)
-![](./doc/img/phone2.png)
-![](./doc/img/phone3.png)
-![](./doc/img/phone4.png)
-![](./doc/img/phone5.png)
-![](./doc/img/phone6.png)
-![](./doc/img/phone7.png)
 ## 目前完成进度
-1. 移动端界面完成
+1. 前端界面完成
 2. 后端管理界面完成
 3. 前后端联调完成
-4. 移动端界面优化未完成
+4. 前端界面登录有bug未改
 5. 后端服务使用Redis缓存未完成
 
 
 ## 补充
-1. 移动端界面是借鉴[new_flutter_mallprovider项目](https://github.com/lotawei/new_flutter_mallprovider)
-项目，自己补充和修改了一些bug和适配flutter3的问题。
-2. 后端的数据来自[litemall项目](https://github.com/linlinjava/litemall)
-商品服务接口借鉴该项目的设计方法，使用mybatis-plus框架完成接口重构。
+1. 本项目从零开发，使用arco design pro框架开发
+2. 后端的使用Python的Flask框架搭建，有简单的贴吧提问回复方式。
 3. 管理端的后端和前端由我自己开发完成，后续会加入缓存优化项目。
-4. 本项目从开发到完成1.0版本用时（11.10-12.20）
+4. 本项目从开发到完成1.0版本用时（1.26-2.9）

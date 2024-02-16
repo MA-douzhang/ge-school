@@ -13,16 +13,6 @@ const USERMANAGER: AppRouteRecordRaw = {
   },
   children: [
     {
-      path: 'address',
-      name: 'Address',
-      component: () => import('@/views/userManger/address/index.vue'),
-      meta: {
-        locale: '地址管理',
-        requiresAuth: true,
-        roles: ['*'],
-      },
-    },
-    {
       path: 'user',
       name: 'User',
       component: () => import('@/views/userManger/user/index.vue'),

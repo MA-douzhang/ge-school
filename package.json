@@ -1,13 +1,13 @@
 {
   "name": "arco-design-pro-vue",
-  "description": "吉购物管理 for Vue",
+  "description": "吉校园管理 for Vue",
   "version": "1.0.0",
   "private": true,
   "author": "ArcoDesign Team",
   "license": "MIT",
   "scripts": {
     "dev": "vite --config ./config/vite.config.dev.ts",
-    "build": "vue-tsc --noEmit && vite build --config ./config/vite.config.prod.ts",
+    "build": "vite build --config ./config/vite.config.prod.ts",
     "report": "cross-env REPORT=true npm run build",
     "preview": "npm run build && vite preview --host",
     "type:check": "vue-tsc --noEmit --skipLibCheck",
@@ -31,6 +31,10 @@
   },
   "dependencies": {
     "@arco-design/web-vue": "^2.44.7",
+    "@bytemd/plugin-gfm": "^1.21.0",
+    "@bytemd/plugin-highlight": "^1.21.0",
+    "@bytemd/plugin-medium-zoom": "^1.21.0",
+    "@bytemd/vue-next": "^1.21.0",
     "@vueuse/core": "^9.3.0",
     "arco-design-pro-vue": "^2.7.2",
     "axios": "^0.24.0",

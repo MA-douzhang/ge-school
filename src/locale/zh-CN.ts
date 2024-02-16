@@ -8,8 +8,9 @@ import localeSettings from './zh-CN/settings';
 
 export default {
   'menu.dashboard': '仪表盘',
-  'menu.goodManager': '商品管理',
-  'menu.mallManager': '商城管理',
+  'menu.question': '问题管理',
+  'menu.imgManager': '图片管理',
+  'menu.postManager': '文章管理',
   'menu.userManager': '用户管理',
   'menu.server.dashboard': '仪表盘-服务端',
   'menu.server.workplace': '工作台-服务端',

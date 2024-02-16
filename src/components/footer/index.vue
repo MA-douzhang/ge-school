@@ -1,5 +1,5 @@
 <template>
-  <a-layout-footer class="footer">吉购物管理</a-layout-footer>
+  <a-layout-footer class="footer">吉校园管理</a-layout-footer>
 </template>
 
 <script lang="ts" setup></script>

@@ -11,15 +11,11 @@ export interface LoginRes {
   token: string;
 }
 export function login(data: LoginData) {
-  return axios.post<LoginRes>('/api/user/login', data);
-}
-
-export function logout() {
-  return axios.post<LoginRes>('/api/user/logout');
+  return axios.post<LoginRes>('http://47.109.132.119:9093/user/login', data);
 }
 
 export function getUserInfo() {
-  return axios.post<UserState>('/api/user/info');
+  return axios.get<UserState>('http://47.109.132.119:9093/user/getUser');
 }
 
 export function getMenuList() {

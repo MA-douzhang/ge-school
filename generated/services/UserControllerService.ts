@@ -19,7 +19,7 @@ userId?: number,
 ): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'GET',
-            url: '/api/user/index',
+            url: '/user/index',
             query: {
                 'userId': userId,
             },

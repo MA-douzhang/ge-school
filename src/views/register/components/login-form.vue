@@ -41,19 +41,39 @@
           </template>
         </a-input-password>
       </a-form-item>
+      <a-form-item
+        field="jobNumber"
+        :rules="[{ required: true, message: `工号不能为空` }]"
+        :validate-trigger="['change', 'blur']"
+        hide-label
+      >
+        <a-input
+          v-model="userInfo.jobNumber"
+          placeholder="请输入工号"
+        >
+          <template #prefix>
+            <icon-user />
+          </template>
+        </a-input>
+      </a-form-item>
+      <a-form-item
+        field="email"
+        :rules="[{ required: true, message: `邮箱不能为空` }]"
+        :validate-trigger="['change', 'blur']"
+        hide-label
+      >
+        <a-input
+          v-model="userInfo.email"
+          placeholder="请输入邮箱"
+        >
+          <template #prefix>
+            <icon-user />
+          </template>
+        </a-input>
+      </a-form-item>
       <a-space :size="16" direction="vertical">
-        <div class="login-form-password-actions">
-          <a-checkbox
-            checked="rememberPassword"
-            :model-value="loginConfig.rememberPassword"
-            @change="setRememberPassword as any"
-          >
-            {{ $t('login.form.rememberPassword') }}
-          </a-checkbox>
-          <a-link href="/register">{{ $t('login.form.forgetPassword') }}</a-link>
-        </div>
         <a-button type="primary" html-type="submit" long :loading="loading">
-          {{ $t('login.form.login') }}
+          注册
         </a-button>
       </a-space>
     </a-form>
@@ -66,25 +86,20 @@
   import { Message } from '@arco-design/web-vue';
   import { ValidatedError } from '@arco-design/web-vue/es/form/interface';
   import { useI18n } from 'vue-i18n';
-  import { useStorage } from '@vueuse/core';
   import { useUserStore } from '@/store';
   import useLoading from '@/hooks/loading';
-  import type { LoginData } from '@/api/user';
+  import { AdminUserControllerService } from "../../../../generated";
 
   const router = useRouter();
   const { t } = useI18n();
   const errorMessage = ref('');
   const { loading, setLoading } = useLoading();
   const userStore = useUserStore();
-
-  const loginConfig = useStorage('login-config', {
-    rememberPassword: true,
-    username: 'admin', // 演示默认值
-    password: 'admin', // demo default value
-  });
   const userInfo = reactive({
-    username: loginConfig.value.username,
-    password: loginConfig.value.password,
+    username: "",
+    password: "",
+    jobNumber:"",
+    email:""
   });
 
   const handleSubmit = async ({
@@ -98,30 +113,22 @@
     if (!errors) {
       setLoading(true);
       try {
-        await userStore.login(values as LoginData);
-        const { redirect, ...othersQuery } = router.currentRoute.value.query;
-        router.push({
-          name: (redirect as string) || 'Workplace',
-          query: {
-            ...othersQuery,
-          },
-        });
-        Message.success(t('login.form.login.success'));
-        const { rememberPassword } = loginConfig.value;
-        const { username, password } = values;
-        // 实际生产环境需要进行加密存储。
-        // The actual production environment requires encrypted storage.
-        loginConfig.value.username = rememberPassword ? username : '';
-        loginConfig.value.password = rememberPassword ? password : '';
+        console.log(values)
+        const res = await AdminUserControllerService.registerPostPost(values);
+        if (res.code === 0) {
+          Message.success('注册成功');
+          router.push({
+            name: 'login',
+          });
+        } else {
+          Message.error(`注册失败， ${res.message}`);
+        }
       } catch (err) {
         errorMessage.value = (err as Error).message;
       } finally {
         setLoading(false);
       }
     }
-  };
-  const setRememberPassword = (value: boolean) => {
-    loginConfig.value.rememberPassword = value;
   };
 </script>
 

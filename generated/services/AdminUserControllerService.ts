@@ -10,25 +10,32 @@ import type { GemallUserQueryRequest } from '../models/GemallUserQueryRequest';
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
+import { AdminUserRegisterRequest } from "../models/AdminUserRegisterRequest";
 
 export class AdminUserControllerService {
 
     /**
      * getUserList
-     * @param queryRequest queryRequest
-     * @param userId userId
      * @returns BaseResponse_Page_GemallUserVO_ OK
      * @returns any Created
      * @throws ApiError
+     * @param jobNumber
+     * @param current
+     * @param pageSize
      */
     public static getUserListUsingPost(
-queryRequest: GemallUserQueryRequest,
-userId?: number,
+    jobNumber:string,
+    current?: number,
+    pageSize?: number
 ): CancelablePromise<BaseResponse_Page_GemallUserVO_ | any> {
         return __request(OpenAPI, {
-            method: 'POST',
-            url: '/api/admin/user/list',
-            body: queryRequest,
+            method: 'GET',
+            url: '/user/list',
+            query: {
+                "jobNumber":jobNumber,
+                "current": current,
+                "pageSize": pageSize
+            },
             errors: {
                 401: `Unauthorized`,
                 403: `Forbidden`,
@@ -49,7 +56,7 @@ loginRequest: AdminUserLoginRequest,
 ): CancelablePromise<BaseResponse_AdminUserVO_ | any> {
         return __request(OpenAPI, {
             method: 'POST',
-            url: '/api/admin/user/login',
+            url: '/user/token',
             body: loginRequest,
             errors: {
                 401: `Unauthorized`,
@@ -80,4 +87,26 @@ userId?: number,
         });
     }
 
+
+    /**
+     * updatePostPost
+     * @returns BaseResponse_Page_GemallUserVO_ OK
+     * @returns any Created
+     * @throws ApiError
+     * @param registerRequest
+     */
+    public static registerPostPost(
+      registerRequest: AdminUserRegisterRequest,
+    ): CancelablePromise<any> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: "/user/register",
+            body:registerRequest,
+            errors: {
+                401: `Unauthorized`,
+                403: `Forbidden`,
+                404: `Not Found`,
+            },
+        });
+    }
 }

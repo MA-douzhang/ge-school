@@ -1,7 +1,6 @@
 import { defineStore } from 'pinia';
 import {
   login as userLogin,
-  logout as userLogout,
   getUserInfo,
   LoginData,
 } from '@/api/user';
@@ -82,7 +81,6 @@ const useUserStore = defineStore('user', {
     // Logout
     async logout() {
       try {
-        await userLogout();
       } finally {
         this.logoutCallBack();
       }
