@@ -1,12 +1,21 @@
 <template>
   <div class="home">
+    <!--    图片滚屏-->
     <BannerComponent />
     <!-- 主体部分一 -->
+
     <div class="mainOne">
       <div class="wrap">学院简介</div>
       <a-divider />
       <div class="text">
-        智能科技学院是吉利学院重点发展的工科学院，学院面向国家经济发展需求，瞄准成渝地区双城经济圈电子信息万亿级产业，以数字化为引领，做强智能科技专业群，旨在培养国家急需的计算机类、电子信息类，尤其是汽车智能化领域的专业人才。
+        智能科技学院致力于培养未来的计算机人才，提供全面的学术教育和专业技能培训。该学院拥有一支资深的教师团队，他们在计算机科学和相关领域具有丰富的教学和研究经验。学院的课程设置涵盖了计算机科学的各个领域，包括编程、算法、人工智能、数据科学等，旨在培养学生在科技领域的创新能力和解决问题的能力。通过实践项目和实习机会，学生将能够应用所学知识，积累丰富的实践经验。智能科技学院致力于为学生提供优质的教育资源和学习环境，助力他们成为业界和学术界的领军人才。
+      </div>
+    </div>
+    <div class="mainOne">
+      <div class="wrap">视频介绍</div>
+      <a-divider />
+      <div class="text">
+        <VideoComponent />
       </div>
     </div>
     <a-row :gutter="20" :style="{ marginBottom: '10px' }">
@@ -67,7 +76,8 @@
 </template>
 
 <script setup lang="ts">
-import BannerComponent from "@/components/BannerComponent.vue"; // @ is an alias to /src
+import BannerComponent from "@/components/BannerComponent.vue";
+import VideoComponent from "@/components/VideoComponent.vue"; // @ is an alias to /src
 </script>
 <style lang="less" scoped>
 .mainOne {
@@ -84,6 +94,7 @@ import BannerComponent from "@/components/BannerComponent.vue"; // @ is an alias
   }
   .text {
     margin: 5px 40px;
+    font-size: 20px;
   }
 }
 </style>

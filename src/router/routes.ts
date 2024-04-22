@@ -27,6 +27,7 @@ import UserLoginView from "@/views/user/UserLoginView.vue";
 import UserRegisterView from "@/views/user/UserRegisterView.vue";
 import QuestionDetail from "@/views/question/QuestionDetail.vue";
 import QuestionAdd from "@/views/question/QuestionAdd.vue";
+// 页面路由
 export const routes: Array<RouteRecordRaw> = [
   {
     path: "/",

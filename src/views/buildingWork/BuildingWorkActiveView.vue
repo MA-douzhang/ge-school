@@ -10,6 +10,7 @@
       <div class="about">
         <h1>{{ route.name }}</h1>
         <a-divider></a-divider>
+        <!--        数据列表渲染-->
         <a-list
           class="list-demo-action-layout"
           item-layout="horizontal"
@@ -119,6 +120,9 @@ const onPageSizeChange = (pageSize: number) => {
     pageSize: pageSize,
   };
 };
+/**
+ * 获取列表信息
+ */
 const getDataList = async () => {
   const res = await PostControllerService.listUsingGet(
     searchParams.value.partitionId,

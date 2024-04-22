@@ -17,6 +17,7 @@
             <img class="logo" src="../assets/yxtx/schoolLogo.png" />
           </div>
         </a-menu-item>
+        <!--        路由展示-->
         <template v-for="item in visibleRoutes" :key="item.name">
           <a-sub-menu
             v-if="item.children && item.children.length > 0"
@@ -40,6 +41,7 @@
         </template>
       </a-menu>
     </a-col>
+    <!--    登录显示-->
     <a-col flex="100px">
       <div>
         <a-dropdown>
@@ -65,7 +67,9 @@ import { useRoute, useRouter } from "vue-router";
 import { computed, ref } from "vue";
 import { useStore } from "vuex";
 import { clearToken } from "@/utils/auth";
+//获取当前路由
 const router = useRouter();
+//获取当前存储的信息
 const store = useStore();
 
 //展示菜单的路由
@@ -90,7 +94,7 @@ const doMenuClick = (key: string) => {
     path: key,
   });
 };
-
+//token是用于存储登录信息标识的信息
 const logout = () => {
   clearToken();
   doMenuClick("/user/login");

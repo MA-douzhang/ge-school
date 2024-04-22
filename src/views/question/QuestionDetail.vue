@@ -60,6 +60,7 @@
             </a-button>
           </div>
         </div>
+        <!--        评论列表-->
         <a-list
           class="list-demo-action-layout"
           item-layout="horizontal"
@@ -160,6 +161,7 @@ const searchParams = ref<any>({
   pageSize: 10, // 设置pageSize的初始值
   current: 1,
 });
+// 数据获取方法
 const loadData = async () => {
   const res = await QuestionCommentControllerService.listUsingGet(
     questionId,
@@ -173,7 +175,7 @@ const loadData = async () => {
     message.error("加载失败：" + res.message);
   }
 };
-
+//初始构子，在渲染数据之前获取数据
 watchEffect(() => {
   searchParams.value = {
     ...searchParams.value,

@@ -1,4 +1,5 @@
 <template>
+  <!--登录和注册页面布局-->
   <div id="userLayout">
     <a-layout style="min-height: 100vh">
       <a-layout-content class="content">

@@ -17,6 +17,9 @@ import { withDefaults, defineProps } from "vue";
 import mediumZoom from "@bytemd/plugin-medium-zoom";
 
 /**
+ * 渲染Markdown格式的页面
+ */
+/**
  * 定义组件属性类型
  */
 interface Props {

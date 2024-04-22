@@ -18,6 +18,10 @@ import { OssControllerService } from "../../generated/services/OssControllerServ
 import mediumZoom from "@bytemd/plugin-medium-zoom";
 
 /**
+ * 引用与掘金网相同的MarkDown编辑器
+ */
+
+/**
  * 定义组件属性类型
  */
 interface Props {
@@ -43,7 +47,10 @@ const props = withDefaults(defineProps<Props>(), {
     console.log(v);
   },
 });
-
+/**
+ * 定义上次文件图片方法
+ * @param files
+ */
 const handleUploadFile = async (files: any) => {
   const res = await OssControllerService.uploadEditUsingPost(files);
   console.log(res);

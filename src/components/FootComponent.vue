@@ -3,7 +3,7 @@
     <div class="footone">
       <ul class="fl">
         <li>
-          <a href="https://cd.guc.edu.cn/">吉利学院</a>
+          <a href="https://cd.guc.edu.cn/">鸡哥学院</a>
           <a href="https://jw.guc.edu.cn/yethan/UserAction?setAction=userLogin"
             >教学教务系统</a
           >
@@ -24,8 +24,8 @@
       </ul>
       <div class="ftonr_r fl">
         <h2>联系我们</h2>
-        <p>邮编：641423</p>
-        <p>电话：400-630-2020</p>
+        <p>微信：dingdoingmie</p>
+        <p>电话：2024-44-4027</p>
       </div>
       <div class="ftonr_r fl">
         <img src="../assets/yxtx/foot_logo.png" alt="" />
@@ -33,7 +33,7 @@
     </div>
     <div class="footbottom">
       <div class="foot">
-        <p>吉利学院 版权所有</p>
+        <p>吉世界 版权所有</p>
       </div>
     </div>
   </div>
@@ -44,7 +44,7 @@
 .footer {
   clear: both;
   width: 100%;
-  background: #680034;
+  background: #74b4eb;
   margin-top: 40px;
   // position: absolute;
   // bottom: 0;

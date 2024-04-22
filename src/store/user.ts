@@ -2,7 +2,7 @@
 import { StoreOptions } from "vuex";
 import ACCESS_ENUM from "@/access/accessEnum";
 import { UserControllerService } from "../../generated";
-
+// 获取用户信息工具
 export default {
   namespaced: true,
   state: () => ({
