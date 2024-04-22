@@ -5,7 +5,7 @@ from models.cast import Cast
 from models.director import Director
 from models.imdb import Imdb
 
-
+#图片
 class Img(db.Document):
     name = db.StringField()
     url = db.StringField()

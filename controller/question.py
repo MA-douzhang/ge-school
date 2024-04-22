@@ -12,24 +12,26 @@ from utils.common import SAVE_FAILED, UPDATE_FAILED, FIND_FAILED, DELETE_FAILED
 
 question = Blueprint('question', __name__)
 
-
+#问题接口
 @question.route('/list', methods=['GET'])
 @jwt_required()
 def getQuestionList():
-    current = int(request.args.get('current', 0))
+    current = int(request.args.get('current', 0))#获取传入参数
     pageSize = int(request.args.get('pageSize', 10))
-    if not all([current, pageSize]):
+    if not all([current, pageSize]):#判空
         return jsonify(code=Code.NOT_NULL.value, msg="数量不能为空")
     try:
         paged = Question.objects(statue=0)
-        questionList = Question.objects(statue=0).skip((current - 1) * pageSize).limit(pageSize)
-        username = get_jwt_identity()
+        questionList = Question.objects(statue=0).skip((current - 1) * pageSize).limit(pageSize)#分页条件查询
+        username = get_jwt_identity()#获取用户信息
         questionListDO = []
         for item in questionList:
-            hasThumb = getHasThumb(item.id, username)
-            pageds = QuestionComment.objects(statue=0,question_id=str(item.id))
-            questionDO= QuestionDO(item.id,item.title, item.create_user_name, item.content, item.thumb_num, item.statue, item.update_time, item.create_time, hasThumb,len(pageds))
-            questionListDO.append(questionDO.to_json())
+            hasThumb = getHasThumb(item.id, username)#查询当前用户是否点赞问题
+            pageds = QuestionComment.objects(statue=0,question_id=str(item.id))#查询当前问题评论列表
+            #将信息封装进问题返回类
+            questionDO= QuestionDO(item.id,item.title, item.create_user_name, item.content,
+                                   item.thumb_num, item.statue, item.update_time, item.create_time, hasThumb,len(pageds))
+            questionListDO.append(questionDO.to_json())#将问题信息添加进问题列表
     except Exception as e:
         return FIND_FAILED()
     resData = {
@@ -136,10 +138,10 @@ def deleteQuestion():  # put application's code here
     if not all([id]):
         return jsonify(code=Code.NOT_NULL.value, msg="参数不能为空")
     try:
-        question = Question.objects(id=id).first()
-        question.delete()
-        QuestionComment.objects(question_id=str(id)).delete()
-        QuestionThumb.objects(question_id=str(id)).delete()
+        question = Question.objects(id=id).first() #查询问题信息
+        question.delete() #删除问题集合中的数据
+        QuestionComment.objects(question_id=str(id)).delete()#根据问题id删除评论集合数据
+        QuestionThumb.objects(question_id=str(id)).delete()#根据问题id删除点赞集合数据
     except Exception as e:
         return DELETE_FAILED()
     resData = {
@@ -163,7 +165,7 @@ def getQuestionById():  # put application's code here
         }
     return jsonify(resData)
 
-
+#文章点赞接口
 @question.route('/doThumb', methods=['POST'])
 @jwt_required()
 def uploadQuestionDoThumb():  # put application's code here
@@ -171,19 +173,20 @@ def uploadQuestionDoThumb():  # put application's code here
     if not all([questionId]):
         return jsonify(code=Code.NOT_NULL.value, msg="参数不能为空")
     try:
-        question = Question.objects(id=questionId).first()
-        username = get_jwt_identity()
+        question = Question.objects(id=questionId).first()#查询问题信息
+        username = get_jwt_identity()#获取用户信息
+        #根据用户信息和问题查询是否存在该点赞数据
         questionThumb = QuestionThumb.objects(question_id=questionId, create_user_name=username).first()
         hasThumb=0
-        if not questionThumb:
+        if not questionThumb:#判断是否存在
             questionThumb = QuestionThumb()
             questionThumb.create_user_name = username
             questionThumb.question_id = questionId
-            questionThumb.save()
-            # 保存点赞数
+            questionThumb.save()# 保存点赞数
+            #更新问题数据
             question.update(thumb_num=question.thumb_num + 1, update_time=datetime.utcnow)
             hasThumb=1
-        else:
+        else:#已经被点赞点击则为取消点赞
             questionThumb.delete()
             # 减少点赞数
             question.update(thumb_num=question.thumb_num - 1, update_time=datetime.utcnow)

@@ -2,7 +2,7 @@ from datetime import datetime
 
 from db import db
 
-
+#问题评论
 class QuestionComment(db.Document):
     question_id=db.StringField() # 问题id
     create_user_name=db.StringField() #作者账户

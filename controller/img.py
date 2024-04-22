@@ -8,7 +8,7 @@ from config import ossConfig
 from models.img import Img
 from utils.code_enum import Code
 from utils.common import SAVE_FAILED, FIND_FAILED, construct_page_data, UPDATE_FAILED
-
+# 图片接口
 img = Blueprint('img', __name__)
 
 

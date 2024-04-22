@@ -7,6 +7,7 @@ from models.questionComment import QuestionComment
 from utils.code_enum import Code
 from utils.common import SAVE_FAILED, UPDATE_FAILED, FIND_FAILED
 
+#问题评论接口
 questionComment = Blueprint('questionComment', __name__)
 
 

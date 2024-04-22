@@ -18,13 +18,7 @@ from utils.CustomJSONEncoder import CustomJSONEncoder
 
 app = Flask(__name__)
 
-
-
-@app.route('/',methods=['GET'])
-def hello_world():  # put application's code here
-    return 'Hello World!'
-
-
+#初始数据库
 def init_db(app):
     '''
     加载数据库
@@ -38,7 +32,7 @@ def init_db(app):
 
 def register_blueprints(app):
     '''
-    创建蓝图
+    创建蓝图 Flask框架
     :param app:
     :return:
     '''
@@ -50,6 +44,7 @@ def register_blueprints(app):
     app.register_blueprint(post, url_prefix='/post')
     app.register_blueprint(question, url_prefix='/question')
     app.register_blueprint(questionComment, url_prefix='/questionComment')
+#初始化
 def create_app():
     app = Flask(__name__)
 
@@ -76,6 +71,7 @@ def create_app():
     app.logger.addHandler(handler)
     return app
 
+#初始化token
 def init_jwt(app):
     app.config["JWT_SECRET_KEY"] = SECRET_KEY  # 设置 jwt 的秘钥
     app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(days=15)

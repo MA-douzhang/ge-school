@@ -6,28 +6,28 @@ from flask_jwt_extended import get_jwt_identity, jwt_required
 from models.post import Post
 from utils.code_enum import Code
 from utils.common import SAVE_FAILED, UPDATE_FAILED, FIND_FAILED
-
+#文章接口
 post = Blueprint('post', __name__)
 
 
 @post.route('/list', methods=['GET'])
 def getPostList():
-    partition_id = int(request.args.get('partitionId', 0))
+    partition_id = int(request.args.get('partitionId', 0))#接收分区Id参数
     current = int(request.args.get('current', 0))
     pageSize = int(request.args.get('pageSize', 10))
-    if not all([current, pageSize]):
+    if not all([current, pageSize]):#判空
         return jsonify(code=Code.NOT_NULL.value, msg="数量不能为空")
     try:
         paged = Post.objects(partition_id=partition_id,statue=0)
-        if partition_id > 0:
-            imgList = Post.objects(partition_id=partition_id, statue=0).skip((current - 1) * pageSize).limit(pageSize)
+        if partition_id > 0: #根据分区分页查询
+            postList = Post.objects(partition_id=partition_id, statue=0).skip((current - 1) * pageSize).limit(pageSize)
         else:
-            imgList = Post.objects(partition_id=partition_id, statue=0).skip((current - 1) * pageSize).limit(pageSize)
+            postList = Post.objects(statue=0).skip((current - 1) * pageSize).limit(pageSize)
     except Exception as e:
         return FIND_FAILED()
     resData = {
         "code": 0,  # 非0即错误 1
-        "data": {"records": imgList, "total": len(paged)},  # 数据位置，一般为数组
+        "data": {"records": postList, "total": len(paged)},  # 数据位置，一般为数组
         "msg": 'success'
     }
     return jsonify(resData)
@@ -35,22 +35,22 @@ def getPostList():
 
 @post.route('/admin/list', methods=['get'])
 def getAdminPostList():  # put application's code here
-    partition_id = int(request.args.get('partitionId', 0))
+    partition_id = int(request.args.get('partitionId', 0))#接收参数
     current = int(request.args.get('current', 0))
     pageSize = int(request.args.get('pageSize', 10))
     if not all([current, pageSize]):
         return jsonify(code=Code.NOT_NULL.value, msg="数量不能为空")
     try:
         paged = Post.objects()
-        if partition_id > 0:
-            imgList = Post.objects(partition_id=partition_id).skip((current - 1) * pageSize).limit(pageSize)
+        if partition_id > 0:#分页查询
+            postList = Post.objects(partition_id=partition_id).skip((current - 1) * pageSize).limit(pageSize)
         else:
-            imgList = Post.objects().skip((current - 1) * pageSize).limit(pageSize)
+            postList = Post.objects().skip((current - 1) * pageSize).limit(pageSize)
     except Exception as e:
         return FIND_FAILED()
     resData = {
         "code": 0,  # 非0即错误 1
-        "data": {"records": imgList, "total": len(paged)},  # 数据位置，一般为数组
+        "data": {"records": postList, "total": len(paged)},  # 数据位置，一般为数组
         "msg": 'success'
     }
     return jsonify(resData)
@@ -65,10 +65,11 @@ def save_post():
     username = get_jwt_identity()
     print(username)
     try:
+        #保存文章信息
         post = Post()
         post.title = title
         post.content = content
-        post.partition_id = partition_id
+        post.partition_id = partition_id #分区Id
         post.create_user_name = username
         post.update_time = datetime.utcnow
         post.save()
@@ -111,12 +112,12 @@ def update_post():
 @post.route('/updateStatue', methods=['post'])
 @jwt_required()
 def uploadPostStatue():  # put application's code here
-    id = request.json.get('id', None)
-    if not all([id]):
+    id = request.json.get('id', None)#接收参数
+    if not all([id]):#判空
         return jsonify(code=Code.NOT_NULL.value, msg="参数不能为空")
     try:
         post = Post.objects(id=id).first()
-        if post.statue == 0:
+        if post.statue == 0:#状态为0修改为1
             post.statue = 1
         else:
             post.statue = 0
@@ -133,18 +134,13 @@ def uploadPostStatue():  # put application's code here
 
 @post.route('/getPost', methods=['get'])
 def getPostById():  # put application's code here
-    id = request.args.get('id', "0")
+    id = request.args.get('id', "0")#接收参数
     if request.method == 'GET':
         post = Post.objects(id=id).first()
-        result = {
-            "title": post.title,
-            "content": post.content,
-            "partitionId": post.partition_id,
-            "statue": post.statue,
-        }
         resData = {
             "code": 0,  # 非0即错误 1
             "data": post,  # 数据位置，一般为数组
             "message": 'success'
         }
     return jsonify(resData)
+

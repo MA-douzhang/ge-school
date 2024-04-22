@@ -5,6 +5,7 @@ from models.partition import Partition
 from models.some import Some
 from utils.common import SAVE_FAILED
 
+# 分区接口
 partition = Blueprint('partition', __name__)
 
 

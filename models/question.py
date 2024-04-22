@@ -2,7 +2,7 @@ from datetime import datetime
 
 from db import db
 
-
+#问题
 class Question(db.Document):
     title = db.StringField()  # 文章题目
     create_user_name = db.StringField()  # 作者账户

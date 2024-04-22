@@ -5,7 +5,7 @@ from models.cast import Cast
 from models.director import Director
 from models.imdb import Imdb
 
-
+#问题点赞
 class QuestionThumb(db.Document):
     question_id=db.StringField() # 问题id
     create_user_name=db.StringField() #作者账户

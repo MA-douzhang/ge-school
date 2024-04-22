@@ -3,7 +3,7 @@ from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identi
 from models.user import User
 from utils.common import DUPLICATE_NAME, create_passwd, SAVE_FAILED, UPDATE_FAILED, FIND_FAILED
 from utils.code_enum import Code
-
+#用户接口
 user = Blueprint('user', __name__)
 
 
@@ -26,17 +26,17 @@ def getUserById():  # put application's code here
 
 @user.route('/token', methods=['POST'])
 def login():
-    username = request.json.get('username', None)
+    username = request.json.get('username', None) #获取传入的参数
     password = request.json.get('password', None)
-    if not all([username, password]):
+    if not all([username, password]): # 参数为空校验
         return jsonify(code=Code.NOT_NULL.value, message="用户名和密码不能为空")
     try:
-        user = User.objects(username=username).first()
+        user = User.objects(username=username).first() # 根据用户账户查询用户信息
     except Exception as e:
         return jsonify(code=Code.SUCCEED_REQUEST_FAILED_RESULT.value, message="获取信息失败")
-    if user is None or not user.check_password(password):
+    if user is None or not user.check_password(password): # 密码校验
         return jsonify(code=Code.ERR_PWD.value, message="用户名或密码错误")
-    access_token = create_access_token(identity=username)
+    access_token = create_access_token(identity=username) # 根据用户账户生成token
     resData = {
         "code": 0,  # 非0即错误 1
         "data": {'username': username, 'token': access_token, 'email': user.email},  # 数据位置，一般为数组
@@ -47,14 +47,14 @@ def login():
 
 @user.route('/register', methods=['POST'])
 def register():
-    username = request.json.get('username', None)
+    username = request.json.get('username', None) #获取传入参数
     password = request.json.get('password', None)
     jobNumber = request.json.get('jobNumber', None)
     email = request.json.get('email', None)
-    if not all([username, password, jobNumber]):
+    if not all([username, password, jobNumber]): #参数判空
         return jsonify(code=Code.NOT_NULL.value, message="用户名和密码工号不能为空")
     try:
-        user = User.objects(username=username).first()
+        user = User.objects(username=username).first() #判断账户是否存在
         if user:
             return DUPLICATE_NAME()
     except Exception as e:
@@ -65,7 +65,7 @@ def register():
         model.email = email
         model.password = create_passwd(password)
         model.job_number = jobNumber
-        model.save()
+        model.save() #保存用户信息
     except Exception as e:
         return SAVE_FAILED()
     print("==> Create Account<{}> Id<{}>".format(model.username, model.id))
@@ -106,16 +106,16 @@ def update():
 
 @user.route('/list', methods=['GET'])
 def getUserList():
-    jobNumber = request.args.get('jobNumber', 0)
-    current = int(request.args.get('current', 0))
-    pageSize = int(request.args.get('pageSize', 10))
+    jobNumber = request.args.get('jobNumber', 0) #获取传入参数
+    current = int(request.args.get('current', 0))#当前页数
+    pageSize = int(request.args.get('pageSize', 10))#每页数量
     if not all([current, pageSize]):
         return jsonify(code=Code.NOT_NULL.value, msg="数量不能为空")
     try:
         paged = User.objects()
-        if len(jobNumber) > 0:
+        if len(jobNumber) > 0:#根据工号查询
             userList = User.objects(job_number=jobNumber).skip((current - 1) * pageSize).limit(pageSize)
-        else:
+        else:#分页查询
             userList = User.objects().skip((current - 1) * pageSize).limit(pageSize)
     except Exception as e:
         return FIND_FAILED()
