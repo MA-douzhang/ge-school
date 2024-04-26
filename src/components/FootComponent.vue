@@ -3,7 +3,7 @@
     <div class="footone">
       <ul class="fl">
         <li>
-          <a href="https://cd.guc.edu.cn/">鸡哥学院</a>
+          <a href="https://cd.guc.edu.cn/">吉学院</a>
           <a href="https://jw.guc.edu.cn/yethan/UserAction?setAction=userLogin"
             >教学教务系统</a
           >
@@ -28,7 +28,7 @@
         <p>电话：2024-44-4027</p>
       </div>
       <div class="ftonr_r fl">
-        <img src="../assets/yxtx/foot_logo.png" alt="" />
+        <img src="../assets/yxtx/schoolLogo.png" alt="" />
       </div>
     </div>
     <div class="footbottom">
