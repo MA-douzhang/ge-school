@@ -4,7 +4,8 @@ Ge-school：
 
 前端：Vue框架
 后端：Python Flask
-
+# 前言
+该项目有完整论文，如有需要请添加WX号：wozuisuainizuichou
 ## 项目地址
 前端地址在分支 frontend [前端前台项目](https://github.com/MA-douzhang/ge-school/tree/frontend)
 
